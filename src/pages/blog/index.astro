@@ -1,0 +1,98 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { url, formatDate } from '../../utils';
+
+const entradas = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<Base
+  title="Blog de ciencia y técnica culinaria · CuliLab"
+  description="Artículos que explican la ciencia de la cocina en lenguaje claro: por qué se corta una salsa, cómo controlar el punto de cocción y mucho más."
+>
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Blog</p>
+        <h1>La ciencia de la cocina, explicada fácil</h1>
+        <p class="entradilla">
+          Cada artículo responde a un problema real de la cocina de casa y te explica el porqué, para que no te vuelva
+          a pasar.
+        </p>
+      </div>
+
+      {entradas.length === 0 ? (
+        <p>Muy pronto publicaremos los primeros artículos.</p>
+      ) : (
+        <ul class="lista-blog">
+          {entradas.map((e) => (
+            <li>
+              <article class="tarjeta entrada">
+                {e.data.image && (
+                  <img src={url(`/${e.data.image}`)} alt={e.data.imageAlt ?? ''} loading="lazy" width="640" height="360" />
+                )}
+                <span class="etiqueta">{e.data.pilar}</span>
+                <h2>
+                  <a href={url(`/blog/${e.id}/`)}>{e.data.title}</a>
+                </h2>
+                <p>{e.data.description}</p>
+                <p class="entrada__fecha">
+                  <time datetime={e.data.date.toISOString()}>{formatDate(e.data.date)}</time>
+                </p>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+
+  <section class="seccion seccion--verde texto-centro">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <h2>¿Quieres más ciencia aplicada a tu cocina?</h2>
+        <p>Descarga gratis la guía con los 10 errores más comunes al empezar a cocinar y el porqué de cada uno.</p>
+      </div>
+      <div class="botones">
+        <a class="boton boton--claro" href={url('/guia-gratuita/')}>Descarga la guía gratis</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lista-blog {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.4rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  }
+  .entrada {
+    height: 100%;
+  }
+  .entrada img {
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .entrada h2 {
+    font-size: 1.3rem;
+    margin-top: 0.8rem;
+  }
+  .entrada h2 a {
+    color: var(--verde);
+    text-decoration: none;
+  }
+  .entrada h2 a:hover {
+    text-decoration: underline;
+  }
+  .entrada__fecha {
+    font-size: 0.9rem;
+    color: var(--texto-suave);
+  }
+</style>

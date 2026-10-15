@@ -1,0 +1,112 @@
+---
+// LANDING de la guía gratuita (conversión prioritaria, Misiones 5 y 7).
+// Destino de la bio de TikTok/Instagram y de los CTA del blog.
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { FORMS } from '../config';
+
+const errores = [
+  'Meter la carne en una sartén que todavía no está caliente.',
+  'Llenar tanto la sartén que el alimento se cuece en vez de dorarse.',
+  'No secar la carne o las verduras antes de dorarlas.',
+  'Echar el ajo a la vez que la cebolla (y quemarlo).',
+  'Remover el arroz sin parar cuando quieres que quede suelto.',
+  'Echar el aceite de la mayonesa de golpe.',
+  'Hervir a borbotones lo que pide fuego suave.',
+  'Cortar la carne nada más sacarla del fuego.',
+  'Probar solo al final, cuando ya no hay arreglo.',
+  'Fiarse del tiempo de la receta y no de lo que ves, hueles y oyes.',
+];
+---
+
+<Base
+  title="Guía gratis: 10 errores al empezar a cocinar · CuliLab"
+  description="Descarga gratis la guía con los 10 errores más comunes al empezar a cocinar, el porqué de cada uno y tu primer reto de 5 minutos."
+  landing
+>
+  <section class="seccion landing">
+    <div class="contenedor landing__rejilla">
+      <div>
+        <p class="antetitulo">Guía gratuita en PDF</p>
+        <h1>Los 10 errores más comunes al empezar a cocinar (y el porqué de cada uno)</h1>
+        <p class="entradilla">
+          Deja de repetir los mismos fallos. Cada error, explicado en dos minutos: qué pasa, por qué pasa y cómo
+          evitarlo.
+        </p>
+        <ul class="lista-check">
+          <li>La guía en PDF, directa a tu email.</li>
+          <li>Tu primer <strong>reto de 5 minutos</strong> para aplicarla hoy mismo.</li>
+          <li>Un email corto a la semana con el porqué de una técnica. Te das de baja en un clic.</li>
+        </ul>
+        <a class="boton solo-movil" href="#formulario-guia">Quiero la guía gratis</a>
+      </div>
+      <div class="landing__formulario">
+        <h2 class="landing__titulo-form">Recíbela gratis</h2>
+        <LeadForm
+          action={FORMS.guia}
+          id="formulario-guia"
+          boton="Enviarme la guía gratis"
+          finalidad="enviarte la guía gratuita y emails con contenidos y novedades de CuliLab"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--clara">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Qué hay dentro</p>
+        <h2>Los 10 errores que explicamos en la guía</h2>
+      </div>
+      <ol class="errores">
+        {errores.map((e) => <li>{e}</li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="seccion texto-centro">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <h2>Gratis, sin tarjeta y sin compromiso</h2>
+        <p>Solo necesitas tu email. Si no te sirve, te das de baja en un clic.</p>
+      </div>
+      <div class="botones">
+        <a class="boton" href="#formulario-guia">Quiero la guía gratis</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .landing__rejilla {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .landing__rejilla {
+      grid-template-columns: 1.1fr 1fr;
+    }
+    .solo-movil {
+      display: none;
+    }
+  }
+  .landing__titulo-form {
+    font-size: 1.4rem;
+  }
+  .errores {
+    display: grid;
+    gap: 0.9rem 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    padding-left: 1.4rem;
+    margin: 0;
+  }
+  .errores li {
+    padding-left: 0.3rem;
+  }
+  .errores li::marker {
+    font-family: var(--font-titulos);
+    font-weight: 700;
+    color: var(--rojo);
+  }
+</style>

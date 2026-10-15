@@ -1,0 +1,93 @@
+---
+import { SITE, SOCIAL, CONTACT_EMAIL } from '../config';
+import { url } from '../utils';
+const anio = new Date().getFullYear();
+---
+
+<footer class="pie">
+  <div class="contenedor pie__rejilla">
+    <div>
+      <p class="pie__marca"><span class="pie__culi">Culi</span>Lab</p>
+      <p>{SITE.claim}. {SITE.usp}</p>
+    </div>
+    <nav aria-label="Enlaces del pie">
+      <h2 class="pie__titulo">Aprende</h2>
+      <ul>
+        <li><a href={url('/metodologia/')}>Metodología y cursos</a></li>
+        <li><a href={url('/guia-gratuita/')}>Guía gratuita</a></li>
+        <li><a href={url('/clase-de-prueba/')}>Clase de prueba</a></li>
+        <li><a href={url('/blog/')}>Blog</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Sobre CuliLab">
+      <h2 class="pie__titulo">CuliLab</h2>
+      <ul>
+        <li><a href={url('/quienes-somos/')}>Quiénes somos</a></li>
+        <li><a href={url('/contacto/')}>Contacto</a></li>
+        <li><a href={url('/privacidad/')}>Privacidad</a></li>
+        {SOCIAL.instagram && <li><a href={SOCIAL.instagram} rel="me noopener">Instagram</a></li>}
+        {SOCIAL.tiktok && <li><a href={SOCIAL.tiktok} rel="me noopener">TikTok</a></li>}
+        {CONTACT_EMAIL && <li><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></li>}
+      </ul>
+    </nav>
+  </div>
+  <div class="contenedor pie__legal">
+    <p>
+      © {anio} CuliLab. Proyecto académico de Marketing Digital (Business Analytics, UNIE, curso 2026/2027).
+    </p>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    background: var(--texto);
+    color: var(--crema);
+    padding-top: 3rem;
+    margin-top: 0;
+  }
+  .pie__rejilla {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  }
+  .pie__marca {
+    font-family: var(--font-titulos);
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: 0 0 0.5rem;
+    color: #9fc25a;
+  }
+  .pie__culi {
+    color: #ff8a73;
+  }
+  .pie__titulo {
+    color: var(--crema);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .pie ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .pie li a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    color: var(--crema);
+  }
+  .pie li a:hover {
+    color: var(--blanco);
+  }
+  .pie__legal {
+    border-top: 1px solid rgb(248 239 230 / 0.2);
+    margin-top: 2rem;
+    padding-block: 1.2rem;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+  .pie__legal p {
+    margin: 0;
+  }
+</style>

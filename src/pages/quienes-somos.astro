@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../utils';
+
+// Equipo fundador. Para añadir foto: subid la imagen a public/img/equipo/
+// y añadid foto: 'img/equipo/nombre.webp' a la persona.
+const equipo: { nombre: string; iniciales: string; foto?: string }[] = [
+  { nombre: 'Adrián González', iniciales: 'AG' },
+  { nombre: 'Daniel García', iniciales: 'DG' },
+  { nombre: 'Jaime Rodríguez', iniciales: 'JR' },
+  { nombre: 'Javier Gijón', iniciales: 'JG' },
+];
+---
+
+<Base
+  title="Quiénes somos · CuliLab, ciencia y técnica culinaria"
+  description="Somos CuliLab: cuatro fundadores que creen que cocinar bien empieza por entender el porqué. Conoce nuestra historia, nuestra misión y cómo trabajamos."
+>
+  <section class="seccion">
+    <div class="contenedor prosa">
+      <p class="antetitulo">Quiénes somos</p>
+      <h1>Creemos que cocinar bien empieza por entender el porqué</h1>
+      <p class="entradilla">
+        CuliLab nace de una frustración que seguro que conoces: seguir una receta al pie de la letra y que, aun así,
+        el plato no salga. Y no saber por qué.
+      </p>
+      <p>
+        Internet está lleno de recetas, pero casi ninguna te explica qué está pasando en la sartén. Por eso, cuando
+        algo falla, la única salida es buscar otra receta. Nosotros queremos darte lo contrario: entender los
+        principios (el calor, las emulsiones, la sal, los almidones) para que cocines con criterio propio y puedas
+        improvisar con lo que tienes en la nevera.
+      </p>
+      <h2>Nuestra misión</h2>
+      <p>
+        Que dejes de depender de la receta. Lo hacemos con clases en directo, retos cortos y fichas técnicas que
+        explican la ciencia de cada técnica en un lenguaje claro, con ejemplos de la cocina de casa y sin elitismo.
+      </p>
+    </div>
+  </section>
+
+  <section class="seccion seccion--clara">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Cómo trabajamos</p>
+        <h2>Tres ideas que guían todo lo que hacemos</h2>
+      </div>
+      <div class="rejilla">
+        <article class="tarjeta tarjeta--roja">
+          <h3>Primero, el porqué</h3>
+          <p>Cada técnica viene con su explicación. Si no podemos explicar por qué funciona, no la enseñamos.</p>
+        </article>
+        <article class="tarjeta">
+          <h3>Cerca de tu cocina</h3>
+          <p>Utensilios normales, ingredientes del súper y problemas reales. Tuteamos y explicamos cada término técnico.</p>
+        </article>
+        <article class="tarjeta tarjeta--verde">
+          <h3>Claros contigo</h3>
+          <p>Sin permanencias ni letra pequeña: te avisamos antes de cada renovación y te das de baja en un clic.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">El equipo</p>
+        <h2>Los fundadores</h2>
+        <p>
+          Somos cuatro fundadores y trabajamos juntos en todo: contenido, comunidad y producto. Estamos formando el
+          equipo docente con profesionales de la cocina y de la ciencia de los alimentos.
+        </p>
+      </div>
+      <ul class="equipo">
+        {equipo.map((p) => (
+          <li class="tarjeta equipo__persona">
+            {p.foto ? (
+              <img src={url(`/${p.foto}`)} alt={`Foto de ${p.nombre}`} width="96" height="96" loading="lazy" />
+            ) : (
+              <span class="equipo__avatar" aria-hidden="true">{p.iniciales}</span>
+            )}
+            <h3>{p.nombre}</h3>
+            <p>Cofundador de CuliLab</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion seccion--verde texto-centro">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <h2>¿Empezamos?</h2>
+        <p>Descarga la guía gratuita y haz tu primer reto de 5 minutos.</p>
+      </div>
+      <div class="botones">
+        <a class="boton boton--claro" href={url('/guia-gratuita/')}>Descarga la guía gratis</a>
+        <a class="boton boton--claro" href={url('/contacto/')}>Escríbenos</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .equipo {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.4rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  }
+  .equipo__persona {
+    text-align: center;
+  }
+  .equipo__persona img,
+  .equipo__avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+  }
+  .equipo__avatar {
+    display: grid;
+    place-items: center;
+    background: var(--verde);
+    color: var(--crema);
+    font-family: var(--font-titulos);
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+  .equipo__persona p {
+    color: var(--texto-suave);
+  }
+</style>

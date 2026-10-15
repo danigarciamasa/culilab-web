@@ -1,0 +1,106 @@
+---
+// LANDING de la clase de prueba (Alejandro, campaña de búsqueda en Google Ads, Misión 6).
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { FORMS } from '../config';
+import { url } from '../utils';
+---
+
+<Base
+  title="Curso de cocina a baja temperatura online · Clase de prueba"
+  description="Prueba gratis una clase de cocina a baja temperatura con rigor: temperaturas exactas, el porqué científico y ficha técnica descargable. Reserva tu plaza."
+  landing
+>
+  <section class="seccion landing">
+    <div class="contenedor landing__rejilla">
+      <div>
+        <p class="antetitulo">Clase de prueba gratuita</p>
+        <h1>Cocina a baja temperatura con rigor: la ciencia detrás de cada técnica</h1>
+        <p class="entradilla">
+          Temperaturas exactas, tiempos y el porqué científico de cada paso, con fichas técnicas descargables. Para
+          quien ya cocina y quiere resultados iguales cada vez.
+        </p>
+        <ul class="lista-check">
+          <li>Una clase completa del módulo de baja temperatura y texturas.</li>
+          <li>La ficha técnica de temperaturas y tiempos para carnes y pescados.</li>
+          <li>Acceso al temario completo para decidir con calma.</li>
+        </ul>
+        <a class="boton solo-movil" href="#formulario-clase">Reservar mi clase de prueba</a>
+      </div>
+      <div>
+        <h2 class="landing__titulo-form">Reserva tu clase gratis</h2>
+        <LeadForm
+          action={FORMS.clasePrueba}
+          id="formulario-clase"
+          boton="Reservar mi clase de prueba"
+          finalidad="darte acceso a la clase de prueba y enviarte información sobre los cursos de CuliLab"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--clara">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Qué vas a aprender</p>
+        <h2>Temario del módulo de baja temperatura y texturas</h2>
+      </div>
+      <div class="rejilla">
+        <article class="tarjeta tarjeta--roja">
+          <h3>Proteínas y temperatura</h3>
+          <p>Qué pasa en la carne y el pescado grado a grado, y por qué el punto depende de la temperatura y no del tiempo.</p>
+        </article>
+        <article class="tarjeta">
+          <h3>Cocción a baja temperatura</h3>
+          <p>Cómo usar un roner o un termómetro en casa, tiempos según grosor y cómo terminar con un buen dorado.</p>
+        </article>
+        <article class="tarjeta tarjeta--verde">
+          <h3>Seguridad alimentaria</h3>
+          <p>Temperaturas seguras, enfriado y conservación: lo que hay que saber para cocinar a baja temperatura sin riesgos.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--verde">
+    <div class="contenedor compromisos">
+      <div>
+        <h2>Sin letra pequeña</h2>
+        <p>Suscripción mensual sin permanencia. Te avisamos antes de cada renovación y te das de baja en un clic.</p>
+      </div>
+      <div class="botones">
+        <a class="boton boton--claro" href="#formulario-clase">Reservar mi clase de prueba</a>
+        <a class="boton boton--claro" href={url('/metodologia/#temario')}>Ver el temario completo</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .landing__rejilla {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .landing__rejilla {
+      grid-template-columns: 1.1fr 1fr;
+    }
+    .solo-movil {
+      display: none;
+    }
+  }
+  .landing__titulo-form {
+    font-size: 1.4rem;
+  }
+  .compromisos {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .compromisos {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
