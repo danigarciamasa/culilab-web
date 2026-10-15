@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTACT_EMAIL } from '../config';
+---
+
+<Base
+  title="Política de privacidad · CuliLab"
+  description="Cómo trata CuliLab tus datos personales: responsable, finalidad, legitimación, destinatarios, conservación y cómo ejercer tus derechos."
+>
+  <section class="seccion">
+    <div class="contenedor prosa">
+      <p class="antetitulo">Información legal</p>
+      <h1>Política de privacidad</h1>
+      <p>
+        En CuliLab tratamos tus datos con transparencia y solo para lo que nos autorizas, conforme al Reglamento (UE)
+        2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).
+      </p>
+      <p>
+        <strong>Aviso:</strong> CuliLab es un proyecto académico de la asignatura de Marketing Digital (Business
+        Analytics, UNIE, curso 2026/2027).
+      </p>
+
+      <h2>Responsable del tratamiento</h2>
+      <p>
+        CuliLab, equipo formado por Adrián González, Daniel García, Jaime Rodríguez y Javier Gijón.
+        {CONTACT_EMAIL ? <>Contacto: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</> : 'Contacto: a través de la página de contacto.'}
+      </p>
+
+      <h2>Qué datos recogemos y para qué</h2>
+      <table>
+        <thead>
+          <tr><th scope="col">Formulario</th><th scope="col">Datos</th><th scope="col">Finalidad</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Guía gratuita</td>
+            <td>Nombre y email</td>
+            <td>Enviarte la guía, el reto de 5 minutos y emails con contenidos y novedades de CuliLab.</td>
+          </tr>
+          <tr>
+            <td>Clase de prueba</td>
+            <td>Nombre y email</td>
+            <td>Darte acceso a la clase de prueba e informarte sobre los cursos.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Legitimación</h2>
+      <p>
+        Tu consentimiento, que das al marcar la casilla del formulario. Puedes retirarlo cuando quieras con el enlace
+        de baja que aparece en todos nuestros emails.
+      </p>
+
+      <h2>Destinatarios</h2>
+      <p>
+        Usamos Brevo (Sendinblue SAS, Francia) para gestionar los formularios y enviar los emails. Actúa como encargado
+        del tratamiento y almacena los datos en la Unión Europea. No cedemos tus datos a terceros.
+      </p>
+
+      <h2>Conservación</h2>
+      <p>Conservamos tus datos mientras sigas suscrito. Cuando te das de baja, dejamos de enviarte emails y los eliminamos.</p>
+
+      <h2>Tus derechos</h2>
+      <p>
+        Puedes acceder a tus datos, rectificarlos, suprimirlos, oponerte a su tratamiento, limitarlo y pedir su
+        portabilidad escribiéndonos. Si crees que no hemos atendido bien tu solicitud, puedes reclamar ante la Agencia
+        Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener">www.aepd.es</a>).
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        Esta web no usa cookies de analítica ni de publicidad. Si en el futuro las añadimos, te pediremos permiso antes
+        mediante un aviso de cookies.
+      </p>
+    </div>
+  </section>
+</Base>

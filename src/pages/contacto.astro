@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTACT_EMAIL, SOCIAL } from '../config';
+import { url } from '../utils';
+---
+
+<Base
+  title="Contacto · CuliLab, escuela online de cocina"
+  description="¿Tienes dudas sobre los cursos, la guía gratuita o la suscripción? Escríbenos por email o por redes sociales y te respondemos encantados."
+>
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Contacto</p>
+        <h1>Hablemos de cocina</h1>
+        <p class="entradilla">
+          ¿Dudas sobre los cursos, la guía o la suscripción? ¿Una técnica que te gustaría que explicáramos? Escríbenos.
+        </p>
+      </div>
+
+      <div class="rejilla">
+        <article class="tarjeta tarjeta--roja">
+          <span class="icono" aria-hidden="true">✉️</span>
+          <h2 class="contacto__titulo">Por email</h2>
+          {CONTACT_EMAIL ? (
+            <>
+              <p>Para dudas sobre cursos, suscripciones o colaboraciones.</p>
+              <a class="boton" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+            </>
+          ) : (
+            <p>Muy pronto publicaremos nuestro email de contacto. Mientras tanto, escríbenos por redes.</p>
+          )}
+        </article>
+        <article class="tarjeta">
+          <span class="icono" aria-hidden="true">📸</span>
+          <h2 class="contacto__titulo">Instagram</h2>
+          <p>Carruseles, reels y directos. Escríbenos por mensaje directo.</p>
+          {SOCIAL.instagram ? (
+            <a class="boton boton--secundario" href={SOCIAL.instagram} rel="me noopener">Ir a Instagram</a>
+          ) : (
+            <p><strong>Próximamente.</strong></p>
+          )}
+        </article>
+        <article class="tarjeta tarjeta--verde">
+          <span class="icono" aria-hidden="true">🎬</span>
+          <h2 class="contacto__titulo">TikTok</h2>
+          <p>Trucos de 30 segundos con el porqué de cada uno.</p>
+          {SOCIAL.tiktok ? (
+            <a class="boton boton--secundario" href={SOCIAL.tiktok} rel="me noopener">Ir a TikTok</a>
+          ) : (
+            <p><strong>Próximamente.</strong></p>
+          )}
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--clara">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <h2>Antes de escribirnos</h2>
+        <p>Quizá tu respuesta ya esté aquí:</p>
+      </div>
+      <ul class="lista-check">
+        <li><a href={url('/metodologia/')}>Cómo funcionan los cursos, el temario y las preguntas frecuentes</a></li>
+        <li><a href={url('/guia-gratuita/')}>Cómo conseguir la guía gratuita</a></li>
+        <li><a href={url('/privacidad/')}>Cómo tratamos tus datos y cómo darte de baja</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contacto__titulo {
+    font-size: 1.3rem;
+  }
+</style>

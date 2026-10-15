@@ -1,0 +1,269 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { SITE, SOCIAL } from '../config';
+import { url, formatDate } from '../utils';
+
+const entradas = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: SITE.name,
+  slogan: SITE.usp,
+  description: SITE.description,
+  url: new URL(url('/'), Astro.site).href,
+  logo: new URL(url('/img/isotipo-512.png'), Astro.site).href,
+  sameAs: [SOCIAL.instagram, SOCIAL.tiktok].filter(Boolean),
+};
+---
+
+<Base
+  title="CuliLab · Escuela online de cocina: entiende el porqué"
+  description="Aprende la ciencia y la técnica de la cocina con directos, retos y fichas técnicas. Para aficionados que quieren cocinar sin depender de la receta. Guía gratis."
+  schema={schema}
+>
+  <!-- 1. Hero: la USP es lo primero que se ve (Misión 0) -->
+  <section class="hero">
+    <div class="contenedor hero__rejilla">
+      <div>
+        <p class="antetitulo">Escuela online de cocina · {SITE.claim}</p>
+        <h1>Entiende el porqué. Aprende la técnica y libérate de la receta.</h1>
+        <p class="entradilla">
+          Directos, retos cortos y fichas técnicas que te explican la ciencia de cada técnica, con lo que ya tienes en
+          tu cocina. Para aficionados, desde cero y sin elitismo.
+        </p>
+        <div class="botones">
+          <a class="boton" href={url('/guia-gratuita/')}>Descarga la guía gratis</a>
+          <a class="boton boton--secundario" href={url('/metodologia/')}>Cómo aprenderás</a>
+        </div>
+      </div>
+      <figure class="hero__figura">
+        <img
+          src={url('/img/logo-culilab.webp')}
+          alt="Logo de CuliLab: una campana de cocina con una llama, un tenedor y un tubo de ensayo"
+          width="480"
+          height="424"
+          fetchpriority="high"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2. Problema: ganchos de la cocina de casa (Misión 1, customer journey) -->
+  <section class="seccion seccion--clara">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">¿Te suena?</p>
+        <h2>Cuando un plato falla, casi nunca es mala suerte</h2>
+        <p class="entradilla">Es física y química. Y en cuanto entiendes qué pasa, deja de pasarte.</p>
+      </div>
+      <div class="rejilla">
+        <article class="tarjeta">
+          <span class="icono" aria-hidden="true">🥚</span>
+          <h3>«Se me ha cortado la mayonesa»</h3>
+          <p>
+            La mayonesa es una emulsión: gotas de aceite suspendidas en el agua de la yema. Si echas el aceite
+            demasiado rápido, la yema no da abasto para envolverlas y se separan.
+          </p>
+          <a href={url('/blog/por-que-se-corta-la-mayonesa/')}>Entiende por qué y sálvala →</a>
+        </article>
+        <article class="tarjeta">
+          <span class="icono" aria-hidden="true">🍚</span>
+          <h3>«El arroz me queda pastoso»</h3>
+          <p>
+            El almidón que suelta el grano espesa el agua. Cuánto lo remueves, el tipo de grano y la cantidad de
+            líquido deciden si queda suelto o meloso.
+          </p>
+        </article>
+        <article class="tarjeta">
+          <span class="icono" aria-hidden="true">🥩</span>
+          <h3>«La carne sale dura»</h3>
+          <p>
+            Las proteínas del músculo se contraen y sueltan jugo con el calor. Controlar la temperatura, y no solo el
+            tiempo, marca la diferencia.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Cómo aprendes: formatos (Misión 0, producto) -->
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Cómo aprendes</p>
+        <h2>Principios, no recetas de memoria</h2>
+        <p>
+          Nuestro temario se organiza por principios (calor, emulsiones, sal, Maillard…) y no por recetas de chef.
+          Cuando entiendes el principio, puedes aplicarlo a cualquier plato.
+        </p>
+      </div>
+      <div class="rejilla">
+        <article class="tarjeta tarjeta--roja">
+          <span class="icono" aria-hidden="true">🔴</span>
+          <h3>Clases en directo</h3>
+          <p>Cocinamos y explicamos en tiempo real, en horario peninsular. Preguntas lo que no entiendes y te respondemos ahí mismo.</p>
+        </article>
+        <article class="tarjeta">
+          <span class="icono" aria-hidden="true">⏱️</span>
+          <h3>Retos cortos</h3>
+          <p>Un reto de 5 minutos para empezar hoy y un reto semanal para practicar. Pequeños pasos para crear el hábito.</p>
+        </article>
+        <article class="tarjeta tarjeta--verde">
+          <span class="icono" aria-hidden="true">📄</span>
+          <h3>Fichas técnicas</h3>
+          <p>Temperaturas, tiempos, proporciones y el porqué de cada paso, en una ficha descargable para tener a mano.</p>
+        </article>
+      </div>
+      <div class="botones">
+        <a class="boton boton--secundario" href={url('/metodologia/')}>Ver la metodología y el temario</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Para quién: una puerta de entrada por persona (Misión 1) -->
+  <section class="seccion seccion--tostada">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">¿Por dónde empiezo?</p>
+        <h2>Elige tu punto de partida</h2>
+      </div>
+      <div class="rejilla">
+        <article class="tarjeta">
+          <span class="etiqueta">Empiezo a cocinar</span>
+          <h3>Quiero dejar de fallar en lo básico</h3>
+          <p>Los 10 errores más comunes al empezar a cocinar, explicados en dos minutos cada uno. Gratis.</p>
+          <a class="boton" href={url('/guia-gratuita/')}>Quiero la guía</a>
+        </article>
+        <article class="tarjeta tarjeta--roja">
+          <span class="etiqueta">Ya cocino a menudo</span>
+          <h3>Quiero improvisar con lo que hay en la nevera</h3>
+          <p>Entiende las técnicas base y empieza a crear tus propios platos. Empieza por la guía y el blog.</p>
+          <a class="boton" href={url('/blog/')}>Leer el blog</a>
+        </article>
+        <article class="tarjeta tarjeta--verde">
+          <span class="etiqueta">Busco rigor técnico</span>
+          <h3>Quiero dominar técnicas avanzadas</h3>
+          <p>Baja temperatura, fermentación y texturas, con temperaturas exactas y fichas técnicas. Prueba una clase.</p>
+          <a class="boton" href={url('/clase-de-prueba/')}>Reservar clase de prueba</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Diferencial frente a la competencia (Misión 0, 0.4) -->
+  <section class="seccion seccion--verde">
+    <div class="contenedor diferencia">
+      <div>
+        <p class="antetitulo">Lo que nos hace distintos</p>
+        <h2>No es otro curso de chef con estrella</h2>
+        <p>
+          Las grandes plataformas te enseñan a replicar los platos de un chef. Nosotros te enseñamos por qué funcionan,
+          para que cocines con criterio propio en tu cocina de casa.
+        </p>
+      </div>
+      <ul class="lista-check">
+        <li><strong>Pensado para casa:</strong> técnicas con los utensilios e ingredientes que ya tienes.</li>
+        <li><strong>Desde cero:</strong> explicamos cada término técnico la primera vez que aparece.</li>
+        <li><strong>El porqué de cada paso:</strong> ciencia explicada con ejemplos cotidianos.</li>
+        <li><strong>Sin sorpresas:</strong> te avisamos antes de cada renovación y te das de baja en un clic.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. Blog: enlazado interno hacia contenido de descubrimiento (Misiones 3 y 4) -->
+  {entradas.length > 0 && (
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="cabecera-seccion">
+          <p class="antetitulo">Del blog</p>
+          <h2>La ciencia de la cocina, explicada fácil</h2>
+        </div>
+        <div class="rejilla">
+          {entradas.map((e) => (
+            <article class="tarjeta">
+              <span class="etiqueta">{e.data.pilar}</span>
+              <h3>
+                <a href={url(`/blog/${e.id}/`)}>{e.data.title}</a>
+              </h3>
+              <p>{e.data.description}</p>
+              <p><small><time datetime={e.data.date.toISOString()}>{formatDate(e.data.date)}</time></small></p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 7. CTA final hacia la conversión prioritaria (Misión 7) -->
+  <section class="seccion seccion--clara texto-centro">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <h2>Empieza hoy con 5 minutos</h2>
+        <p class="entradilla">
+          Descarga la guía gratuita y recibe tu primer reto de 5 minutos. Sin tarjeta y sin compromiso.
+        </p>
+      </div>
+      <div class="botones">
+        <a class="boton" href={url('/guia-gratuita/')}>Descarga la guía gratis</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(2.5rem, 7vw, 5rem);
+    background:
+      radial-gradient(circle at 85% 30%, rgb(224 99 8 / 0.12), transparent 45%),
+      var(--crema);
+  }
+  .hero__rejilla {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+  .hero__figura {
+    margin: 0;
+    max-width: 240px;
+    justify-self: center;
+  }
+  .hero__figura img {
+    border-radius: 24px;
+    box-shadow: var(--sombra);
+  }
+  @media (min-width: 860px) {
+    .hero__rejilla {
+      grid-template-columns: 1.25fr 1fr;
+    }
+    .hero__figura {
+      max-width: 440px;
+    }
+  }
+  .tarjeta .boton {
+    margin-top: 0.4rem;
+  }
+  .tarjeta h3 a {
+    color: var(--verde);
+    text-decoration: none;
+  }
+  .tarjeta h3 a:hover {
+    text-decoration: underline;
+  }
+  .tarjeta .etiqueta {
+    margin-bottom: 0.8rem;
+  }
+  .diferencia {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .diferencia {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

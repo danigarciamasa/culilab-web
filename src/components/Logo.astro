@@ -1,0 +1,33 @@
+---
+import { url } from '../utils';
+---
+
+<a class="logo" href={url('/')} aria-label="CuliLab, ir al inicio">
+  <img src={url('/img/isotipo-96.webp')} alt="" width="48" height="48" />
+  <span class="logo__texto" aria-hidden="true"><span class="logo__culi">Culi</span><span class="logo__lab">Lab</span></span>
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    min-height: 48px;
+  }
+  .logo img {
+    border-radius: 50%;
+  }
+  .logo__texto {
+    font-family: var(--font-titulos);
+    font-weight: 700;
+    font-size: 1.55rem;
+    letter-spacing: -0.02em;
+  }
+  .logo__culi {
+    color: var(--rojo);
+  }
+  .logo__lab {
+    color: var(--verde);
+  }
+</style>

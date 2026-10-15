@@ -1,0 +1,250 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../utils';
+
+const modulos = [
+  {
+    n: '01',
+    titulo: 'Calor y temperatura',
+    nivel: 'Inicial',
+    texto: 'Cómo pasa el calor a los alimentos, la reacción de Maillard y por qué controlar la temperatura importa más que el tiempo.',
+  },
+  {
+    n: '02',
+    titulo: 'Emulsiones y salsas',
+    nivel: 'Inicial',
+    texto: 'Mayonesa, vinagretas y salsas que no se cortan: qué une el aceite y el agua, y cómo salvarlas cuando se separan.',
+  },
+  {
+    n: '03',
+    titulo: 'Sal, ácidos y sabor',
+    nivel: 'Inicial',
+    texto: 'Cuándo salar, cómo equilibrar un plato y qué hacer si se te ha pasado de sal o le falta algo y no sabes qué.',
+  },
+  {
+    n: '04',
+    titulo: 'Almidones, masas y arroces',
+    nivel: 'Intermedio',
+    texto: 'Por qué el arroz queda pastoso o suelto, cómo espesar sin grumos y qué hace el gluten en una masa.',
+  },
+  {
+    n: '05',
+    titulo: 'Baja temperatura y texturas',
+    nivel: 'Avanzado',
+    texto: 'Cocción a baja temperatura, puntos exactos de carnes y pescados y seguridad alimentaria, con fichas de temperaturas.',
+  },
+  {
+    n: '06',
+    titulo: 'Fermentación',
+    nivel: 'Avanzado',
+    texto: 'Masa madre, encurtidos y fermentados caseros: qué hacen los microorganismos y cómo controlarlos en casa.',
+  },
+];
+
+const faqs = [
+  {
+    p: '¿Necesito saber cocinar para apuntarme?',
+    r: 'No. Empezamos desde cero y explicamos cada término técnico la primera vez que aparece. Si ya cocinas, los módulos intermedios y avanzados te darán el porqué de lo que haces.',
+  },
+  {
+    p: '¿Necesito utensilios profesionales?',
+    r: 'No. Las técnicas están pensadas para una cocina de casa. Cuando una técnica avanzada necesita algo concreto, como un termómetro de cocina, te lo decimos antes y te damos alternativas.',
+  },
+  {
+    p: '¿Y si no puedo ver un directo?',
+    r: 'Cada directo queda grabado para que lo veas cuando puedas, y la ficha técnica te resume lo importante.',
+  },
+  {
+    p: '¿Cuánto cuesta?',
+    r: 'La guía y el primer reto son gratis. Después, una suscripción mensual sin permanencia. Anunciaremos el precio en el lanzamiento; apúntate a la guía y serás de los primeros en saberlo.',
+  },
+  {
+    p: '¿Puedo darme de baja cuando quiera?',
+    r: 'Sí. Sin permanencia, la baja se hace en un clic y te avisamos por email antes de cada renovación.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.p,
+    acceptedAnswer: { '@type': 'Answer', text: f.r },
+  })),
+};
+---
+
+<Base
+  title="Curso de cocina online por principios · Metodología CuliLab"
+  description="Así es nuestro curso de cocina online: directos, retos de 5 minutos y fichas técnicas organizados por principios científicos. Del nivel inicial al avanzado."
+  schema={faqSchema}
+>
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Metodología y cursos</p>
+        <h1>Un curso de cocina online que te explica el porqué</h1>
+        <p class="entradilla">
+          No memorizas recetas: entiendes los principios que hay detrás de cada técnica. Así sabes qué hacer cuando
+          algo falla y puedes improvisar con lo que tienes.
+        </p>
+      </div>
+
+      <h2 class="visualmente-oculto">Cómo funciona</h2>
+      <ol class="pasos">
+        <li class="tarjeta">
+          <span class="pasos__num" aria-hidden="true">1</span>
+          <h3>Empieza gratis</h3>
+          <p>Descarga la guía de técnicas base y haz tu primer reto de 5 minutos.</p>
+        </li>
+        <li class="tarjeta">
+          <span class="pasos__num" aria-hidden="true">2</span>
+          <h3>Pruébalo en directo</h3>
+          <p>Únete a un directo abierto o reserva una clase de prueba para ver cómo enseñamos.</p>
+        </li>
+        <li class="tarjeta">
+          <span class="pasos__num" aria-hidden="true">3</span>
+          <h3>Suscríbete al mes</h3>
+          <p>Acceso a directos, retos semanales y todas las fichas técnicas. Sin permanencia.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="seccion seccion--clara">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Formatos</p>
+        <h2>Tres formatos que se refuerzan entre sí</h2>
+      </div>
+      <div class="rejilla">
+        <article class="tarjeta tarjeta--roja">
+          <h3>Directos semanales</h3>
+          <p>Una técnica por sesión, explicada mientras cocinamos. Preguntas en el chat y respuestas en el momento. Quedan grabados.</p>
+        </article>
+        <article class="tarjeta">
+          <h3>Retos</h3>
+          <p>El reto de 5 minutos para empezar hoy y un reto semanal para aplicar lo aprendido. Compartes tu resultado con la comunidad.</p>
+        </article>
+        <article class="tarjeta tarjeta--verde">
+          <h3>Fichas técnicas</h3>
+          <p>Temperaturas, tiempos, proporciones y el porqué de cada paso, en PDF para imprimir o tener en el móvil.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="temario">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Temario</p>
+        <h2>Organizado por principios, del nivel inicial al avanzado</h2>
+        <p>Cada módulo combina directos, un reto semanal y sus fichas técnicas.</p>
+      </div>
+      <div class="rejilla">
+        {modulos.map((m) => (
+          <article class="tarjeta modulo">
+            <p class="modulo__cabecera">
+              <span class="modulo__num" aria-hidden="true">{m.n}</span>
+              <span class="etiqueta">Nivel {m.nivel.toLowerCase()}</span>
+            </p>
+            <h3>{m.titulo}</h3>
+            <p>{m.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--verde">
+    <div class="contenedor compromisos">
+      <div>
+        <p class="antetitulo">Nuestros compromisos</p>
+        <h2>Lo que puedes esperar de nosotros</h2>
+      </div>
+      <ul class="lista-check">
+        <li>Técnicas con los utensilios e ingredientes de una cocina de casa.</li>
+        <li>Lenguaje claro: ningún término técnico sin explicar.</li>
+        <li>Suscripción mensual sin permanencia y baja en un clic.</li>
+        <li>Aviso por email antes de cada renovación. Nada de cobros sorpresa.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor faq">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Preguntas frecuentes</p>
+        <h2>Lo que nos preguntáis antes de empezar</h2>
+      </div>
+      {faqs.map((f) => (
+        <details>
+          <summary>{f.p}</summary>
+          <p>{f.r}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="seccion seccion--clara texto-centro">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <h2>¿Lo pruebas sin compromiso?</h2>
+        <p class="entradilla">Empieza con la guía gratuita o reserva una clase de prueba si buscas técnicas avanzadas.</p>
+      </div>
+      <div class="botones">
+        <a class="boton" href={url('/guia-gratuita/')}>Descarga la guía gratis</a>
+        <a class="boton boton--secundario" href={url('/clase-de-prueba/')}>Reservar clase de prueba</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pasos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.4rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  }
+  .pasos__num {
+    display: inline-grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: var(--rojo);
+    color: var(--blanco);
+    font-family: var(--font-titulos);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+  .modulo__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
+  .modulo__num {
+    font-family: var(--font-titulos);
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--marron);
+  }
+  .compromisos {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .compromisos {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .faq {
+    max-width: 48rem;
+  }
+</style>

@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE } from '../../config';
+import { url, formatDate } from '../../utils';
+
+export async function getStaticPaths() {
+  const entradas = await getCollection('blog', ({ data }) => !data.draft);
+  return entradas.map((entrada) => ({ params: { slug: entrada.id }, props: { entrada } }));
+}
+
+const { entrada } = Astro.props;
+const { data } = entrada;
+const { Content } = await render(entrada);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.date.toISOString(),
+  dateModified: (data.updated ?? data.date).toISOString(),
+  inLanguage: 'es-ES',
+  keywords: data.keyword,
+  author: { '@type': 'Organization', name: SITE.name },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.name,
+    logo: { '@type': 'ImageObject', url: new URL(url('/img/isotipo-512.png'), Astro.site).href },
+  },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+  ...(data.image && { image: new URL(url(`/${data.image}`), Astro.site).href }),
+};
+---
+
+<Base
+  title={data.seoTitle ?? `${data.title} · CuliLab`}
+  description={data.description}
+  image={data.image}
+  type="article"
+  schema={schema}
+>
+  <article class="seccion">
+    <div class="contenedor prosa">
+      <nav aria-label="Ruta de navegación" class="migas">
+        <a href={url('/')}>Inicio</a> › <a href={url('/blog/')}>Blog</a> › <span aria-current="page">{data.pilar}</span>
+      </nav>
+      <h1>{data.title}</h1>
+      <p class="meta">
+        <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
+        {data.updated && <> · Actualizado el <time datetime={data.updated.toISOString()}>{formatDate(data.updated)}</time></>}
+      </p>
+      {data.image && <img src={url(`/${data.image}`)} alt={data.imageAlt ?? ''} width="1200" height="675" />}
+      <Content />
+
+      <aside class="cta-entrada">
+        <h2>¿Te ha servido? Empieza con la guía gratuita</h2>
+        <p>Los 10 errores más comunes al empezar a cocinar, el porqué de cada uno y tu primer reto de 5 minutos.</p>
+        <a class="boton" href={url('/guia-gratuita/')}>Descarga la guía gratis</a>
+      </aside>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .migas {
+    font-size: 0.92rem;
+    margin-bottom: 1.2rem;
+    color: var(--texto-suave);
+  }
+  .meta {
+    color: var(--texto-suave);
+    font-size: 0.95rem;
+  }
+  .cta-entrada {
+    margin-top: 3rem;
+    padding: 1.8rem;
+    background: var(--blanco);
+    border-radius: var(--radio);
+    border-top: 5px solid var(--rojo);
+    box-shadow: var(--sombra);
+  }
+  .cta-entrada h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+  }
+</style>

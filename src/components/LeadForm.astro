@@ -1,0 +1,125 @@
+---
+// Formulario de captación conectado a Brevo (Misión 7).
+// Mientras no exista la URL del formulario en src/config.ts, se muestra
+// desactivado con el aviso «en preparación».
+import { url } from '../utils';
+
+interface Props {
+  action: string;      // URL del formulario de Brevo (FORMS.* en config.ts)
+  id: string;
+  boton: string;       // texto del CTA
+  finalidad: string;   // para qué usamos el email (RGPD: información clara)
+}
+const { action, id, boton, finalidad } = Astro.props;
+const activo = Boolean(action);
+---
+
+<form
+  class="formulario"
+  id={id}
+  method="post"
+  action={activo ? action : undefined}
+  aria-describedby={`${id}-rgpd`}
+>
+  <div class="campo">
+    <label for={`${id}-nombre`}>Tu nombre</label>
+    <input id={`${id}-nombre`} name="FIRSTNAME" type="text" autocomplete="given-name" required />
+  </div>
+  <div class="campo">
+    <label for={`${id}-email`}>Tu email</label>
+    <input id={`${id}-email`} name="EMAIL" type="email" autocomplete="email" inputmode="email" required />
+  </div>
+  <div class="campo campo--check">
+    <input id={`${id}-optin`} name="OPT_IN" type="checkbox" value="1" required />
+    <label for={`${id}-optin`}>
+      Acepto recibir emails de CuliLab y he leído la <a href={url('/privacidad/')}>política de privacidad</a>.
+    </label>
+  </div>
+  <!-- Campo trampa contra bots de Brevo: debe quedar vacío -->
+  <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" class="visualmente-oculto" aria-hidden="true" />
+  <input type="hidden" name="locale" value="es" />
+
+  <button class="boton formulario__boton" type="submit" disabled={!activo}>{boton}</button>
+
+  {!activo && (
+    <p class="formulario__aviso" role="status">
+      Estamos preparando el envío: el formulario se activará en los próximos días.
+    </p>
+  )}
+
+  <p class="formulario__rgpd" id={`${id}-rgpd`}>
+    <strong>Información básica sobre protección de datos.</strong> Responsable: CuliLab. Finalidad: {finalidad}.
+    Legitimación: tu consentimiento. Destinatarios: Brevo (Sendinblue SAS, servidores en la UE), como encargado del
+    tratamiento. Derechos: acceder, rectificar y suprimir tus datos y darte de baja en cualquier email.{' '}
+    <a href={url('/privacidad/')}>Más información</a>.
+  </p>
+</form>
+
+<style>
+  .formulario {
+    background: var(--blanco);
+    color: var(--texto);
+    border-radius: var(--radio);
+    padding: clamp(1.3rem, 4vw, 2rem);
+    box-shadow: var(--sombra);
+    border-top: 5px solid var(--rojo);
+  }
+  .campo {
+    margin-bottom: 1rem;
+  }
+  .campo label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .campo input[type='text'],
+  .campo input[type='email'] {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.6rem 0.9rem;
+    font: inherit;
+    border: 2px solid #c9b29c;
+    border-radius: 10px;
+    background: var(--blanco);
+    color: var(--texto);
+  }
+  .campo input:focus-visible {
+    border-color: var(--verde);
+  }
+  .campo--check {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+  .campo--check input {
+    width: 22px;
+    height: 22px;
+    margin-top: 0.2rem;
+    flex: none;
+    accent-color: var(--verde);
+  }
+  .campo--check label {
+    font-weight: 400;
+    margin: 0;
+  }
+  .formulario__boton {
+    width: 100%;
+    margin-top: 0.4rem;
+  }
+  .formulario__boton:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .formulario__aviso {
+    margin: 0.8rem 0 0;
+    font-weight: 700;
+    color: var(--verde);
+  }
+  .formulario__rgpd {
+    margin: 1rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--texto-suave);
+  }
+</style>

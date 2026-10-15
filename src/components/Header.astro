@@ -1,0 +1,165 @@
+---
+import Logo from './Logo.astro';
+import { url } from '../utils';
+
+interface Props {
+  landing?: boolean;
+}
+const { landing = false } = Astro.props;
+
+const enlaces = [
+  { href: '/', texto: 'Inicio' },
+  { href: '/metodologia/', texto: 'Metodología' },
+  { href: '/blog/', texto: 'Blog' },
+  { href: '/quienes-somos/', texto: 'Quiénes somos' },
+  { href: '/contacto/', texto: 'Contacto' },
+];
+
+const actual = Astro.url.pathname;
+const esActual = (href: string) => {
+  const ruta = url(href);
+  return href === '/' ? actual === ruta : actual.startsWith(ruta);
+};
+---
+
+<header class="cabecera">
+  <div class="contenedor cabecera__fila">
+    <Logo />
+    {!landing && (
+      <nav aria-label="Menú principal">
+        <button class="menu__boton" type="button" aria-expanded="false" aria-controls="menu-lista">
+          <span aria-hidden="true">☰</span> Menú
+        </button>
+        <ul class="menu__lista" id="menu-lista">
+            {enlaces.map((e) => (
+              <li>
+                <a href={url(e.href)} aria-current={esActual(e.href) ? 'page' : undefined}>
+                  {e.texto}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a class="boton menu__cta" href={url('/guia-gratuita/')}>Guía gratis</a>
+            </li>
+        </ul>
+      </nav>
+    )}
+  </div>
+</header>
+
+<style>
+  .cabecera {
+    background: var(--crema);
+    border-bottom: 1px solid var(--crema-2);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .cabecera__fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-height: 72px;
+  }
+  .menu__boton {
+    display: none;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 48px;
+    padding: 0 1rem;
+    border: 2px solid var(--verde);
+    border-radius: 999px;
+    color: var(--verde);
+    font-family: var(--font-titulos);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .menu__lista {
+    list-style: none;
+    margin: 0;
+    padding: 1rem 1.25rem 1.4rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+  /* Con JavaScript, en móvil el menú se pliega tras el botón */
+  :global(.js) .menu__boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  :global(.js) .menu__lista {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--crema);
+    border-bottom: 1px solid var(--crema-2);
+    box-shadow: var(--sombra);
+  }
+  :global(.js) .menu__lista.abierto {
+    display: grid;
+  }
+  .menu__lista a:not(.boton) {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 0.4rem;
+    color: var(--texto);
+    text-decoration: none;
+    font-family: var(--font-titulos);
+    font-weight: 600;
+  }
+  .menu__lista a[aria-current='page'] {
+    color: var(--rojo);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--naranja);
+  }
+  .menu__cta {
+    margin-top: 0.6rem;
+    width: 100%;
+  }
+
+  @media (min-width: 900px) {
+    :global(.js) .menu__boton {
+      display: none;
+    }
+    .menu__lista,
+    :global(.js) .menu__lista {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      position: static;
+      padding: 0;
+      box-shadow: none;
+      border: 0;
+      background: none;
+    }
+    .menu__lista a:not(.boton) {
+      padding: 0;
+    }
+    .menu__cta {
+      margin: 0;
+      width: auto;
+    }
+  }
+</style>
+
+<script>
+  const boton = document.querySelector<HTMLButtonElement>('.menu__boton');
+  const lista = document.getElementById('menu-lista');
+  boton?.addEventListener('click', () => {
+    const abierto = lista?.classList.toggle('abierto') ?? false;
+    boton.setAttribute('aria-expanded', String(abierto));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lista?.classList.contains('abierto')) {
+      lista.classList.remove('abierto');
+      boton?.setAttribute('aria-expanded', 'false');
+      boton?.focus();
+    }
+  });
+</script>

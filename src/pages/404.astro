@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../utils';
+---
+
+<Base title="Página no encontrada · CuliLab" description="Esta página no existe." noindex>
+  <section class="seccion texto-centro">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Error 404</p>
+        <h1>Esta receta no está en nuestro recetario</h1>
+        <p class="entradilla">La página que buscas no existe o ha cambiado de sitio.</p>
+      </div>
+      <div class="botones">
+        <a class="boton" href={url('/')}>Volver al inicio</a>
+        <a class="boton boton--secundario" href={url('/blog/')}>Ir al blog</a>
+      </div>
+    </div>
+  </section>
+</Base>
