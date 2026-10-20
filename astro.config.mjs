@@ -9,4 +9,6 @@ export default defineConfig({
   base: '/culilab-web',
   trailingSlash: 'always',
   integrations: [sitemap()],
+  // CSS dentro del HTML: sin petición que bloquee el renderizado (PageSpeed, Misión 3).
+  build: { inlineStylesheets: 'always' },
 });

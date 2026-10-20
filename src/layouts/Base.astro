@@ -1,8 +1,12 @@
 ---
-import '@fontsource/poppins/600.css';
-import '@fontsource/poppins/700.css';
-import '@fontsource/nunito/400.css';
-import '@fontsource/nunito/700.css';
+// Solo el subconjunto latino (español): menos @font-face y menos CSS (Misión 3).
+import '@fontsource/poppins/latin-600.css';
+import '@fontsource/poppins/latin-700.css';
+import '@fontsource/nunito/latin-400.css';
+import '@fontsource/nunito/latin-700.css';
+// Precarga de las dos fuentes de la primera pantalla (H1 y texto): evita saltos de diseño (CLS).
+import poppins700 from '@fontsource/poppins/files/poppins-latin-700-normal.woff2?url';
+import nunito400 from '@fontsource/nunito/files/nunito-latin-400-normal.woff2?url';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -13,6 +17,7 @@ interface Props {
   title: string;          // <title>: máx. ~60 caracteres, keyword al principio
   description: string;    // meta description: máx. ~155 caracteres
   image?: string;         // imagen para redes (ruta dentro de public/)
+  imageAlt?: string;      // texto alternativo de esa imagen
   type?: 'website' | 'article';
   noindex?: boolean;
   landing?: boolean;      // landing: cabecera sin menú para no distraer
@@ -23,6 +28,7 @@ const {
   title,
   description,
   image = 'img/og-culilab.jpg',
+  imageAlt = 'CuliLab, escuela online de ciencia y técnica culinaria',
   type = 'website',
   noindex = false,
   landing = false,
@@ -40,6 +46,8 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>document.documentElement.classList.add('js');</script>
+    <link rel="preload" href={poppins700} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={nunito400} as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -56,6 +64,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
 
     {ANALYTICS.searchConsoleVerification && (
