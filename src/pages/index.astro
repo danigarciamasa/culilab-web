@@ -8,29 +8,37 @@ const entradas = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'EducationalOrganization',
-  name: SITE.name,
-  slogan: SITE.usp,
-  description: SITE.description,
-  url: new URL(url('/'), Astro.site).href,
-  logo: new URL(url('/img/isotipo-512.png'), Astro.site).href,
-  sameAs: [SOCIAL.instagram, SOCIAL.tiktok].filter(Boolean),
-};
+const inicio = new URL(url('/'), Astro.site).href;
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    name: SITE.name,
+    slogan: SITE.usp,
+    description: SITE.description,
+    url: inicio,
+    logo: new URL(url('/img/isotipo-512.png'), Astro.site).href,
+    sameAs: [SOCIAL.instagram, SOCIAL.tiktok].filter(Boolean),
+  },
+  // WebSite: ayuda a Google a mostrar «CuliLab» como nombre del sitio en los resultados (Misión 3).
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: inicio, inLanguage: 'es-ES' },
+];
 ---
 
 <Base
-  title="CuliLab · Escuela online de cocina: entiende el porqué"
-  description="Aprende la ciencia y la técnica de la cocina con directos, retos y fichas técnicas. Para aficionados que quieren cocinar sin depender de la receta. Guía gratis."
+  title="Escuela de cocina online: entiende el porqué · CuliLab"
+  description="Escuela de cocina online para aficionados: directos, retos y fichas técnicas que explican la ciencia de cada técnica. Empieza gratis con nuestra guía."
   schema={schema}
 >
   <!-- 1. Hero: la USP es lo primero que se ve (Misión 0) -->
   <section class="hero">
     <div class="contenedor hero__rejilla">
       <div>
-        <p class="antetitulo">Escuela online de cocina · {SITE.claim}</p>
-        <h1>Entiende el porqué. Aprende la técnica y libérate de la receta.</h1>
+        <!-- H1 con la keyword principal (Misión 3) + la USP visible (Misión 0) -->
+        <h1>
+          <span class="antetitulo h1__keyword">Escuela de cocina online · {SITE.claim}</span>{' '}
+          Entiende el porqué. Aprende la técnica y libérate de la receta.
+        </h1>
         <p class="entradilla">
           Directos, retos cortos y fichas técnicas que te explican la ciencia de cada técnica, con lo que ya tienes en
           tu cocina. Para aficionados, desde cero y sin elitismo.
@@ -43,6 +51,8 @@ const schema = {
       <figure class="hero__figura">
         <img
           src={url('/img/logo-culilab.webp')}
+          srcset={`${url('/img/logo-culilab-240.webp')} 240w, ${url('/img/logo-culilab.webp')} 480w`}
+          sizes="(min-width: 860px) 440px, 240px"
           alt="Logo de CuliLab: una campana de cocina con una llama, un tenedor y un tubo de ensayo"
           width="480"
           height="424"
@@ -77,6 +87,7 @@ const schema = {
             El almidón que suelta el grano espesa el agua. Cuánto lo remueves, el tipo de grano y la cantidad de
             líquido deciden si queda suelto o meloso.
           </p>
+          <a href={url('/metodologia/#modulo-almidones')}>Lo vemos en el módulo de almidones y arroces →</a>
         </article>
         <article class="tarjeta">
           <span class="icono" aria-hidden="true">🥩</span>
@@ -85,6 +96,7 @@ const schema = {
             Las proteínas del músculo se contraen y sueltan jugo con el calor. Controlar la temperatura, y no solo el
             tiempo, marca la diferencia.
           </p>
+          <a href={url('/metodologia/#modulo-calor')}>Lo vemos en el módulo de calor y temperatura →</a>
         </article>
       </div>
     </div>
@@ -242,6 +254,10 @@ const schema = {
     .hero__figura {
       max-width: 440px;
     }
+  }
+  .h1__keyword {
+    display: block;
+    margin-bottom: 0.9rem;
   }
   .tarjeta .boton {
     margin-top: 0.4rem;

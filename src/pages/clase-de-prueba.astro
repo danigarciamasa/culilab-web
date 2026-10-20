@@ -3,19 +3,32 @@
 import Base from '../layouts/Base.astro';
 import LeadForm from '../components/LeadForm.astro';
 import { FORMS } from '../config';
+import { SITE } from '../config';
 import { url } from '../utils';
+
+// Datos estructurados del curso (Misión 3): nombre, descripción y quién lo imparte.
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: 'Curso de cocina a baja temperatura online',
+  description:
+    'Módulo de baja temperatura y texturas: proteínas y temperatura, cocción a baja temperatura en casa y seguridad alimentaria, con fichas técnicas.',
+  inLanguage: 'es-ES',
+  provider: { '@type': 'Organization', name: SITE.name, url: new URL(url('/'), Astro.site).href },
+};
 ---
 
 <Base
-  title="Curso de cocina a baja temperatura online · Clase de prueba"
-  description="Prueba gratis una clase de cocina a baja temperatura con rigor: temperaturas exactas, el porqué científico y ficha técnica descargable. Reserva tu plaza."
+  title="Curso de cocina a baja temperatura online · CuliLab"
+  description="Prueba gratis una clase del curso de cocina a baja temperatura online: temperaturas exactas, el porqué científico y ficha técnica. Reserva tu plaza."
+  schema={schema}
   landing
 >
   <section class="seccion landing">
     <div class="contenedor landing__rejilla">
       <div>
         <p class="antetitulo">Clase de prueba gratuita</p>
-        <h1>Cocina a baja temperatura con rigor: la ciencia detrás de cada técnica</h1>
+        <h1>Curso de cocina a baja temperatura online, con la ciencia de cada técnica</h1>
         <p class="entradilla">
           Temperaturas exactas, tiempos y el porqué científico de cada paso, con fichas técnicas descargables. Para
           quien ya cocina y quiere resultados iguales cada vez.

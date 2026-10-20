@@ -3,12 +3,13 @@ title: "¿Por qué se corta la mayonesa? La ciencia y cómo salvarla en 30 segun
 seoTitle: "Por qué se corta la mayonesa y cómo arreglarla · CuliLab"
 description: "La mayonesa se corta por física, no por mala suerte. Te explicamos qué es una emulsión, las 3 causas más habituales y el truco para recuperarla."
 date: 2026-10-15
+updated: 2026-10-20
 pilar: "Errores y soluciones"
 fase: "descubrimiento"
 keyword: "por qué se corta la mayonesa"
 ---
 
-Estás batiendo, todo va bien y, de repente, la mayonesa se convierte en un charco de aceite con grumos amarillos. No es mala suerte ni el «mal fario» de la batidora: es física. Y cuando entiendes qué ha pasado, puedes arreglarla en medio minuto y evitar que te vuelva a ocurrir.
+Estás batiendo, todo va bien y, de repente, la mayonesa se convierte en un charco de aceite con grumos amarillos. ¿Por qué se corta la mayonesa? No es mala suerte ni el «mal fario» de la batidora: es física. Y cuando entiendes qué ha pasado, puedes arreglarla en medio minuto y evitar que te vuelva a ocurrir.
 
 ## Qué es en realidad una mayonesa
 
@@ -30,7 +31,7 @@ Cuantas más gotas de aceite metes, más apretadas quedan. Llega un punto en el 
 
 ### 3. Ingredientes a temperaturas muy distintas
 
-Con el huevo recién salido de la nevera, el aceite se vuelve más espeso y cuesta más dividirlo en gotas finas. **Solución:** usa el huevo y el aceite a temperatura ambiente, o al menos a una temperatura parecida.
+Con el huevo recién salido de la nevera, el aceite se vuelve más espeso y cuesta más dividirlo en gotas finas. **Solución:** usa el huevo y el aceite a temperatura ambiente, o al menos a una temperatura parecida. Este y otros fallos de principiante los tienes resumidos en nuestra [guía gratuita de errores comunes al cocinar](/culilab-web/guia-gratuita/).
 
 ## Cómo salvar una mayonesa cortada en 30 segundos
 
@@ -50,6 +51,6 @@ Funciona porque empiezas una emulsión nueva desde cero, con poca grasa y mucho 
 | Se corta cuando ya estaba espesa | Demasiado aceite para tan poca agua | Unas gotas de agua o de limón |
 | No llega a espesar | Ingredientes muy fríos | Todo a temperatura ambiente |
 
-Este mismo principio explica por qué se cortan una vinagreta, un alioli o una salsa holandesa. Cuando entiendes las emulsiones, dejas de memorizar recetas de salsas: sabes qué hacer con cualquiera.
+Este mismo principio explica por qué se cortan una vinagreta, un alioli o una salsa holandesa. Cuando entiendes las emulsiones, dejas de memorizar recetas de salsas: sabes qué hacer con cualquiera. Es justo lo que trabajamos en el [módulo de emulsiones y salsas de nuestro curso](/culilab-web/metodologia/#modulo-emulsiones).
 
 **Un apunte de seguridad:** la mayonesa casera lleva huevo crudo. Guárdala en la nevera y consúmela cuanto antes. Si es para embarazadas, niños pequeños o personas mayores, usa huevo pasteurizado.

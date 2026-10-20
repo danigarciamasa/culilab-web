@@ -2,39 +2,54 @@
 import Base from '../layouts/Base.astro';
 import { url } from '../utils';
 
-const modulos = [
+const modulos: {
+  n: string;
+  id: string;
+  titulo: string;
+  nivel: string;
+  texto: string;
+  enlace?: { href: string; texto: string };
+}[] = [
   {
     n: '01',
+    id: 'modulo-calor',
     titulo: 'Calor y temperatura',
     nivel: 'Inicial',
     texto: 'Cómo pasa el calor a los alimentos, la reacción de Maillard y por qué controlar la temperatura importa más que el tiempo.',
   },
   {
     n: '02',
+    id: 'modulo-emulsiones',
     titulo: 'Emulsiones y salsas',
     nivel: 'Inicial',
     texto: 'Mayonesa, vinagretas y salsas que no se cortan: qué une el aceite y el agua, y cómo salvarlas cuando se separan.',
+    enlace: { href: '/blog/por-que-se-corta-la-mayonesa/', texto: 'Lee por qué se corta la mayonesa →' },
   },
   {
     n: '03',
+    id: 'modulo-sal',
     titulo: 'Sal, ácidos y sabor',
     nivel: 'Inicial',
     texto: 'Cuándo salar, cómo equilibrar un plato y qué hacer si se te ha pasado de sal o le falta algo y no sabes qué.',
   },
   {
     n: '04',
+    id: 'modulo-almidones',
     titulo: 'Almidones, masas y arroces',
     nivel: 'Intermedio',
     texto: 'Por qué el arroz queda pastoso o suelto, cómo espesar sin grumos y qué hace el gluten en una masa.',
   },
   {
     n: '05',
+    id: 'modulo-baja-temperatura',
     titulo: 'Baja temperatura y texturas',
     nivel: 'Avanzado',
     texto: 'Cocción a baja temperatura, puntos exactos de carnes y pescados y seguridad alimentaria, con fichas de temperaturas.',
+    enlace: { href: '/clase-de-prueba/', texto: 'Prueba gratis una clase de este módulo →' },
   },
   {
     n: '06',
+    id: 'modulo-fermentacion',
     titulo: 'Fermentación',
     nivel: 'Avanzado',
     texto: 'Masa madre, encurtidos y fermentados caseros: qué hacen los microorganismos y cómo controlarlos en casa.',
@@ -76,8 +91,8 @@ const faqSchema = {
 ---
 
 <Base
-  title="Curso de cocina online por principios · Metodología CuliLab"
-  description="Así es nuestro curso de cocina online: directos, retos de 5 minutos y fichas técnicas organizados por principios científicos. Del nivel inicial al avanzado."
+  title="Curso de cocina online por principios · CuliLab"
+  description="Así es nuestro curso de cocina online: clases en directo, retos de 5 minutos y fichas técnicas por principios científicos. Del nivel inicial al avanzado."
   schema={faqSchema}
 >
   <section class="seccion">
@@ -144,13 +159,14 @@ const faqSchema = {
       </div>
       <div class="rejilla">
         {modulos.map((m) => (
-          <article class="tarjeta modulo">
+          <article class="tarjeta modulo" id={m.id}>
             <p class="modulo__cabecera">
               <span class="modulo__num" aria-hidden="true">{m.n}</span>
               <span class="etiqueta">Nivel {m.nivel.toLowerCase()}</span>
             </p>
             <h3>{m.titulo}</h3>
             <p>{m.texto}</p>
+            {m.enlace && <a href={url(m.enlace.href)}>{m.enlace.texto}</a>}
           </article>
         ))}
       </div>
@@ -243,6 +259,9 @@ const faqSchema = {
     .compromisos {
       grid-template-columns: 1fr 1fr;
     }
+  }
+  .modulo {
+    scroll-margin-top: 90px;
   }
   .faq {
     max-width: 48rem;

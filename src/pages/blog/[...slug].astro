@@ -13,7 +13,7 @@ const { entrada } = Astro.props;
 const { data } = entrada;
 const { Content } = await render(entrada);
 
-const schema = {
+const articulo = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: data.title,
@@ -31,12 +31,25 @@ const schema = {
   mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
   ...(data.image && { image: new URL(url(`/${data.image}`), Astro.site).href }),
 };
+
+// Migas de pan en datos estructurados, iguales a las visibles (Misión 3).
+const migas = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(url('/'), Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: new URL(url('/blog/'), Astro.site).href },
+    { '@type': 'ListItem', position: 3, name: data.title },
+  ],
+};
+const schema = [articulo, migas];
 ---
 
 <Base
   title={data.seoTitle ?? `${data.title} · CuliLab`}
   description={data.description}
   image={data.image}
+  imageAlt={data.imageAlt}
   type="article"
   schema={schema}
 >
