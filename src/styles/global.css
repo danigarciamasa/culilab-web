@@ -12,8 +12,8 @@
   --texto-suave: #5a4636;
   --blanco: #fffdfa;
 
-  --font-titulos: 'Poppins', system-ui, sans-serif;
-  --font-texto: 'Nunito', system-ui, sans-serif;
+  --font-titulos: var(--font-poppins);
+  --font-texto: var(--font-nunito);
 
   --radio: 14px;
   --sombra: 0 2px 14px rgb(42 26 16 / 0.08);
