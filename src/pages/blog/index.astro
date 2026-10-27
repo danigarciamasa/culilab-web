@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { url, formatDate } from '../../utils';
+import { PILARES } from '../../config';
 
 const entradas = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
@@ -22,6 +23,21 @@ const entradas = (await getCollection('blog', ({ data }) => !data.draft)).sort(
           a pasar.
         </p>
       </div>
+
+      <ul class="pilares" aria-label="Pilares del blog">
+        {PILARES.map((p) => (
+          <li class="pilar">
+            <h2>{p.nombre}</h2>
+            <p>{p.texto}</p>
+            <p class="pilar__cuenta">
+              {(() => {
+                const n = entradas.filter((e) => e.data.pilar === p.nombre).length;
+                return n === 0 ? 'Próximamente' : n === 1 ? '1 artículo' : `${n} artículos`;
+              })()}
+            </p>
+          </li>
+        ))}
+      </ul>
 
       {entradas.length === 0 ? (
         <p>Muy pronto publicaremos los primeros artículos.</p>
@@ -63,6 +79,32 @@ const entradas = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 </Base>
 
 <style>
+  .pilares {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  }
+  .pilar {
+    padding: 1rem 1.2rem;
+    background: var(--blanco);
+    border-radius: var(--radio);
+    border-left: 5px solid var(--naranja);
+  }
+  .pilar h2 {
+    font-size: 1.05rem;
+    margin-bottom: 0.3rem;
+  }
+  .pilar p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  .pilar__cuenta {
+    margin-top: 0.4rem !important;
+    color: var(--texto-suave);
+  }
   .lista-blog {
     list-style: none;
     padding: 0;

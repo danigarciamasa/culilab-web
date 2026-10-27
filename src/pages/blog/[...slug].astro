@@ -13,6 +13,28 @@ const { entrada } = Astro.props;
 const { data } = entrada;
 const { Content } = await render(entrada);
 
+// Llamada a la acción según la fase del journey (Misión 4): guía para Hugo y Carla, clase de prueba para Alejandro.
+const CTAS = {
+  guia: {
+    titulo: '¿Te ha servido? Empieza con la guía gratuita',
+    texto: 'Los 10 errores más comunes al empezar a cocinar, el porqué de cada uno y tu primer reto de 5 minutos.',
+    boton: 'Descarga la guía gratis',
+    href: '/guia-gratuita/',
+  },
+  clase: {
+    titulo: 'Prueba gratis una clase del módulo de baja temperatura',
+    texto: 'Una clase completa, la ficha técnica de tiempos y temperaturas y el temario entero para decidir con calma.',
+    boton: 'Reservar mi clase de prueba',
+    href: '/clase-de-prueba/',
+  },
+};
+const cta = CTAS[data.cta];
+
+// «Sigue leyendo»: primero las del mismo pilar, después las más recientes (enlazado interno, Misión 3).
+const relacionadas = (await getCollection('blog', ({ data: d, id }) => !d.draft && id !== entrada.id))
+  .sort((a, b) => Number(b.data.pilar === data.pilar) - Number(a.data.pilar === data.pilar) || b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 2);
+
 const articulo = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -63,14 +85,28 @@ const schema = [articulo, migas];
         <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
         {data.updated && <> · Actualizado el <time datetime={data.updated.toISOString()}>{formatDate(data.updated)}</time></>}
       </p>
-      {data.image && <img src={url(`/${data.image}`)} alt={data.imageAlt ?? ''} width="1200" height="675" />}
+      {data.image && <img src={url(`/${data.image}`)} alt={data.imageAlt ?? ''} width="1200" height="675" fetchpriority="high" />}
       <Content />
 
       <aside class="cta-entrada">
-        <h2>¿Te ha servido? Empieza con la guía gratuita</h2>
-        <p>Los 10 errores más comunes al empezar a cocinar, el porqué de cada uno y tu primer reto de 5 minutos.</p>
-        <a class="boton" href={url('/guia-gratuita/')}>Descarga la guía gratis</a>
+        <h2>{cta.titulo}</h2>
+        <p>{cta.texto}</p>
+        <a class="boton" href={url(cta.href)}>{cta.boton}</a>
       </aside>
+
+      {relacionadas.length > 0 && (
+        <nav class="sigue-leyendo" aria-labelledby="sigue-leyendo">
+          <h2 id="sigue-leyendo">Sigue leyendo</h2>
+          <ul>
+            {relacionadas.map((r) => (
+              <li>
+                <span class="etiqueta">{r.data.pilar}</span>
+                <a href={url(`/blog/${r.id}/`)}>{r.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </div>
   </article>
 </Base>
@@ -96,5 +132,29 @@ const schema = [articulo, migas];
   .cta-entrada h2 {
     margin-top: 0;
     font-size: 1.4rem;
+  }
+  .sigue-leyendo {
+    margin-top: 2.5rem;
+  }
+  .sigue-leyendo h2 {
+    font-size: 1.3rem;
+  }
+  .sigue-leyendo ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .sigue-leyendo li {
+    display: grid;
+    gap: 0.4rem;
+    justify-items: start;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--crema-2);
+  }
+  .sigue-leyendo a {
+    font-family: var(--font-titulos);
+    font-weight: 600;
+    color: var(--verde);
   }
 </style>

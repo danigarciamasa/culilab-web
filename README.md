@@ -29,7 +29,8 @@ Abre el archivo, pulsa el icono del lápiz (✏️), edita y pulsa **Commit chan
 3. Copia la cabecera de `por-que-se-corta-la-mayonesa.md` (lo que va entre las dos líneas `---`) y cambia los valores.
 4. Escribe debajo el texto. `## Título` es un H2, `### Título` un H3, `**negrita**` y `[texto](url)` para enlaces. Los enlaces a otras páginas de la web empiezan por `/culilab-web/`, por ejemplo `[la guía](/culilab-web/guia-gratuita/)`.
 5. Las imágenes van en `public/img/blog/` (mejor en `.webp` y de menos de 200 KB) y se indican en `image` e `imageAlt`.
-6. **Commit changes**. Si pones `draft: true`, la entrada no se publica.
+6. `pilar` tiene que ser uno de los 4 pilares de `src/config.ts` (Errores y soluciones, Ciencia de la técnica, Temperatura y precisión, Aprende con método). `cta` elige el botón final: `guia` (guía gratuita) o `clase` (clase de prueba).
+7. **Commit changes**. Si pones `draft: true`, la entrada no se publica.
 
 ## Trabajar en local (opcional)
 
