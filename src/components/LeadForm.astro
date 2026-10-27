@@ -3,6 +3,7 @@
 // Mientras no exista la URL del formulario en src/config.ts, se muestra
 // desactivado con el aviso «en preparación».
 import { url } from '../utils';
+import { CONTACT_EMAIL } from '../config';
 
 interface Props {
   action: string;      // URL del formulario de Brevo (FORMS.* en config.ts)
@@ -50,7 +51,7 @@ const activo = Boolean(action);
   <p class="formulario__rgpd" id={`${id}-rgpd`}>
     <strong>Información básica sobre protección de datos.</strong> Responsable: CuliLab. Finalidad: {finalidad}.
     Legitimación: tu consentimiento. Destinatarios: Brevo (Sendinblue SAS, servidores en la UE), como encargado del
-    tratamiento. Derechos: acceder, rectificar y suprimir tus datos y darte de baja en cualquier email.{' '}
+    tratamiento. Derechos: acceder, rectificar y suprimir tus datos y darte de baja en cualquier email{CONTACT_EMAIL && <>, o escribiendo a {CONTACT_EMAIL}</>}.{' '}
     <a href={url('/privacidad/')}>Más información sobre privacidad</a>.
   </p>
 </form>

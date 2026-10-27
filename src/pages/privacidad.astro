@@ -63,7 +63,7 @@ import { CONTACT_EMAIL } from '../config';
       <h2>Tus derechos</h2>
       <p>
         Puedes acceder a tus datos, rectificarlos, suprimirlos, oponerte a su tratamiento, limitarlo y pedir su
-        portabilidad escribiéndonos. Si crees que no hemos atendido bien tu solicitud, puedes reclamar ante la Agencia
+        portabilidad escribiéndonos{CONTACT_EMAIL && <> a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></>}. Si crees que no hemos atendido bien tu solicitud, puedes reclamar ante la Agencia
         Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener">www.aepd.es</a>).
       </p>
 

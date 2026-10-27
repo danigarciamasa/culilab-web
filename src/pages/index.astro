@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import { SITE, SOCIAL } from '../config';
+import { SITE, SOCIAL, CONTACT_EMAIL } from '../config';
 import { url, formatDate } from '../utils';
 
 const entradas = (await getCollection('blog', ({ data }) => !data.draft))
@@ -19,6 +19,7 @@ const schema = [
     url: inicio,
     logo: new URL(url('/img/isotipo-512.png'), Astro.site).href,
     sameAs: [SOCIAL.instagram, SOCIAL.tiktok].filter(Boolean),
+    ...(CONTACT_EMAIL && { email: CONTACT_EMAIL }),
   },
   // WebSite: ayuda a Google a mostrar «CuliLab» como nombre del sitio en los resultados (Misión 3).
   { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: inicio, inLanguage: 'es-ES' },
