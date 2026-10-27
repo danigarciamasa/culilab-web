@@ -3,10 +3,13 @@ title: "¿Por qué se corta la mayonesa? La ciencia y cómo salvarla en 30 segun
 seoTitle: "Por qué se corta la mayonesa y cómo arreglarla · CuliLab"
 description: "La mayonesa se corta por física, no por mala suerte. Te explicamos qué es una emulsión, las 3 causas más habituales y el truco para recuperarla."
 date: 2026-10-15
-updated: 2026-10-20
+updated: 2026-10-27
 pilar: "Errores y soluciones"
 fase: "descubrimiento"
 keyword: "por qué se corta la mayonesa"
+cta: "guia"
+image: "img/blog/mayonesa-emulsion.webp"
+imageAlt: "Esquema de una mayonesa vista al microscopio: gotas de aceite rodeadas de lecitina de la yema, repartidas en el agua de la yema y el limón"
 ---
 
 Estás batiendo, todo va bien y, de repente, la mayonesa se convierte en un charco de aceite con grumos amarillos. ¿Por qué se corta la mayonesa? No es mala suerte ni el «mal fario» de la batidora: es física. Y cuando entiendes qué ha pasado, puedes arreglarla en medio minuto y evitar que te vuelva a ocurrir.
@@ -51,6 +54,6 @@ Funciona porque empiezas una emulsión nueva desde cero, con poca grasa y mucho 
 | Se corta cuando ya estaba espesa | Demasiado aceite para tan poca agua | Unas gotas de agua o de limón |
 | No llega a espesar | Ingredientes muy fríos | Todo a temperatura ambiente |
 
-Este mismo principio explica por qué se cortan una vinagreta, un alioli o una salsa holandesa. Cuando entiendes las emulsiones, dejas de memorizar recetas de salsas: sabes qué hacer con cualquiera. Es justo lo que trabajamos en el [módulo de emulsiones y salsas de nuestro curso](/culilab-web/metodologia/#modulo-emulsiones).
+Este mismo principio explica por qué se cortan una vinagreta, un alioli o una salsa holandesa. Cuando entiendes las emulsiones, dejas de memorizar recetas de salsas: sabes qué hacer con cualquiera. Es justo lo que trabajamos en el [módulo de emulsiones y salsas de nuestro curso](/culilab-web/metodologia/#modulo-emulsiones). Y si lo que se te resiste es el dorado de la carne, el porqué está en la [reacción de Maillard](/culilab-web/blog/reaccion-de-maillard/).
 
 **Un apunte de seguridad:** la mayonesa casera lleva huevo crudo. Guárdala en la nevera y consúmela cuanto antes. Si es para embarazadas, niños pequeños o personas mayores, usa huevo pasteurizado.

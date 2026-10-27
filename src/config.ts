@@ -13,6 +13,26 @@ export const SITE = {
   locale: 'es_ES',
 };
 
+// Pilares de contenido del blog (Misión 4). El nombre debe coincidir con el campo «pilar» de cada entrada.
+export const PILARES = [
+  {
+    nombre: 'Errores y soluciones',
+    texto: 'El porqué de los fallos de la cocina de casa y cómo arreglarlos: salsas cortadas, arroces pasados, carne dura.',
+  },
+  {
+    nombre: 'Ciencia de la técnica',
+    texto: 'Lo que pasa dentro de los alimentos cuando cocinas: dorado, emulsiones, almidones y fermentación.',
+  },
+  {
+    nombre: 'Temperatura y precisión',
+    texto: 'Tiempos, temperaturas y puntos exactos para que el resultado salga igual cada vez.',
+  },
+  {
+    nombre: 'Aprende con método',
+    texto: 'Cómo aprender a cocinar sin depender de recetas: retos, rutinas y en qué fijarte al elegir un curso.',
+  },
+] as const;
+
 // Redes sociales (comprobad antes que el @ está libre: Misión 0, tarea 1).
 export const SOCIAL = {
   instagram: '', // p. ej. 'https://www.instagram.com/culilab/'

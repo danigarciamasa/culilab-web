@@ -370,6 +370,20 @@ img {
   margin: 1.5rem 0;
 }
 
+.prosa figure {
+  margin: 1.8rem 0;
+}
+
+.prosa figure img {
+  margin: 0;
+}
+
+.prosa figcaption {
+  font-size: 0.92rem;
+  color: var(--texto-suave);
+  margin-top: 0.5rem;
+}
+
 .prosa table {
   width: 100%;
   border-collapse: collapse;

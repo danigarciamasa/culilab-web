@@ -12,9 +12,10 @@ const blog = defineCollection({
     description: z.string(),           // meta description (máx. ~155 caracteres)
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
-    pilar: z.string(),                 // pilar de contenido (Misión 4)
+    pilar: z.enum(['Errores y soluciones', 'Ciencia de la técnica', 'Temperatura y precisión', 'Aprende con método']), // pilar de contenido (Misión 4, src/config.ts)
     fase: z.enum(['descubrimiento', 'consideración', 'conversión']),
     keyword: z.string(),               // keyword principal (Misión 3)
+    cta: z.enum(['guia', 'clase']).default('guia'), // conversión al final: guía (Hugo, Carla) o clase de prueba (Alejandro)
     image: z.string().optional(),      // ruta dentro de public/, p. ej. img/blog/mayonesa.webp
     imageAlt: z.string().optional(),
     draft: z.boolean().default(false), // true = no se publica
