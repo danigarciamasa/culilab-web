@@ -36,8 +36,11 @@ const activo = Boolean(action);
       Acepto recibir emails de CuliLab y he leído la <a href={url('/privacidad/')}>política de privacidad</a>.
     </label>
   </div>
-  <!-- Campo trampa contra bots de Brevo: debe quedar vacío -->
-  <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" class="visualmente-oculto" aria-hidden="true" />
+  <!-- Campo trampa contra bots de Brevo: debe quedar vacío. Lleva etiqueta para que WAVE no marque «Missing form label» -->
+  <div class="visualmente-oculto" aria-hidden="true">
+    <label for={`${id}-check`}>No rellenes este campo</label>
+    <input id={`${id}-check`} type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" />
+  </div>
   <input type="hidden" name="locale" value="es" />
 
   <button class="boton formulario__boton" type="submit" disabled={!activo}>{boton}</button>
