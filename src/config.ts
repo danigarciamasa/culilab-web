@@ -40,7 +40,7 @@ export const SOCIAL = {
 };
 
 // Email de contacto del equipo (una cuenta gratuita de Gmail vale).
-export const CONTACT_EMAIL = '';
+export const CONTACT_EMAIL = 'culilab8@gmail.com';
 
 // Formularios de Brevo (Misión 7). En Brevo: Contactos → Formularios →
 // crear formulario → «Compartir» → copiar la URL que empieza por
