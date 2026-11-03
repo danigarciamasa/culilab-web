@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { CONTACT_EMAIL } from '../config';
+import { url } from '../utils';
 ---
 
 <Base
@@ -54,7 +55,9 @@ import { CONTACT_EMAIL } from '../config';
       <h2>Destinatarios</h2>
       <p>
         Usamos Brevo (Sendinblue SAS, Francia) para gestionar los formularios y enviar los emails. Actúa como encargado
-        del tratamiento y almacena los datos en la Unión Europea. No cedemos tus datos a terceros.
+        del tratamiento y almacena los datos en la Unión Europea. Si aceptas las cookies de analítica, Google Ireland
+        Limited trata datos de navegación para Google Analytics (más información en la
+        <a href={url('/cookies/')}>política de cookies</a>). No cedemos tus datos a terceros.
       </p>
 
       <h2>Conservación</h2>
@@ -69,8 +72,8 @@ import { CONTACT_EMAIL } from '../config';
 
       <h2>Cookies</h2>
       <p>
-        Esta web no usa cookies de analítica ni de publicidad. Si en el futuro las añadimos, te pediremos permiso antes
-        mediante un aviso de cookies.
+        Solo usamos cookies de analítica (Google Analytics) si nos das permiso en el aviso de cookies. No usamos cookies
+        de publicidad. Todos los detalles están en la <a href={url('/cookies/')}>política de cookies</a>.
       </p>
     </div>
   </section>
