@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import { ANALYTICS, CONTACT_EMAIL } from '../config';
+import { url } from '../utils';
+const sufijo = ANALYTICS.ga4.replace('G-', '');
+---
+
+<Base
+  title="Política de cookies · CuliLab"
+  description="Qué cookies usa la web de CuliLab, para qué sirven, cuánto duran y cómo aceptar, rechazar o cambiar tu elección en cualquier momento."
+>
+  <section class="seccion">
+    <div class="contenedor prosa">
+      <p class="antetitulo">Información legal</p>
+      <h1>Política de cookies</h1>
+      <p>
+        Una cookie es un pequeño archivo que la web guarda en tu navegador. En CuliLab solo usamos cookies de analítica,
+        y únicamente si nos das permiso en el aviso que aparece en tu primera visita, como exigen la Ley 34/2002 (LSSI)
+        y el RGPD. No usamos cookies de publicidad ni vendemos datos.
+      </p>
+
+      <h2>Qué cookies usamos</h2>
+      <table>
+        <thead>
+          <tr><th scope="col">Nombre</th><th scope="col">Para qué</th><th scope="col">Duración</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>_ga</td>
+            <td>Google Analytics: distinguir visitantes de forma anónima para contar visitas</td>
+            <td>2 años</td>
+          </tr>
+          <tr>
+            <td class="cookie-nombre">_ga_{sufijo}</td>
+            <td>Google Analytics: guardar el estado de la sesión</td>
+            <td>2 años</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Las dos las pone Google Ireland Limited, responsable de Google Analytics.</p>
+      <p>
+        Además guardamos en tu navegador (almacenamiento local, no es una cookie) si has aceptado o rechazado la
+        analítica, para no volver a preguntarte en cada página. Se llama «culilab-cookies» y no contiene datos personales.
+      </p>
+
+      <h2>Para qué usamos Google Analytics</h2>
+      <p>
+        Para saber cuántas personas visitan la web, desde dónde llegan (Google, Instagram, TikTok…), qué páginas y
+        entradas del blog leen y cuántas descargan la guía. Con eso decidimos qué contenidos mejorar. Google Analytics 4
+        no guarda tu dirección IP completa. Puede haber transferencias de datos a Estados Unidos amparadas en el Marco de
+        Privacidad de Datos UE-EE. UU.
+      </p>
+
+      <h2>Cómo aceptar, rechazar o cambiar tu elección</h2>
+      <p>
+        Si rechazas, Google Analytics no se carga y la web funciona igual. Puedes cambiar de opinión cuando quieras:
+      </p>
+      <p><button type="button" class="boton boton--secundario" data-reabrir-cookies>Cambiar mi elección</button></p>
+      <p>
+        También puedes borrar o bloquear las cookies desde la configuración de tu navegador (Chrome, Safari, Firefox o
+        Edge).
+      </p>
+
+      <h2>Más información</h2>
+      <p>
+        Lee nuestra <a href={url('/privacidad/')}>política de privacidad</a>
+        {CONTACT_EMAIL && <> o escríbenos a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></>}.
+        CuliLab es un proyecto académico de la asignatura de Marketing Digital (Business Analytics, UNIE, curso 2026/2027).
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cookie-nombre {
+    overflow-wrap: anywhere;
+  }
+</style>

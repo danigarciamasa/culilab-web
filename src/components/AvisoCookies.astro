@@ -1,0 +1,115 @@
+---
+// Aviso de cookies (Misión 8). Google Analytics solo se carga si el visitante pulsa «Aceptar».
+// La elección se guarda en localStorage («culilab-cookies»: «aceptadas» o «rechazadas»).
+// Sin JavaScript no se muestra el aviso y tampoco se carga Analytics.
+import { ANALYTICS } from '../config';
+import { url } from '../utils';
+---
+
+{ANALYTICS.ga4 && (
+  <>
+    <section class="aviso-cookies" id="aviso-cookies" aria-label="Aviso de cookies" hidden>
+      <div class="contenedor aviso-cookies__caja">
+        <p class="aviso-cookies__texto">
+          Usamos cookies de Google Analytics para saber cuántas personas visitan la web y qué contenidos les sirven.
+          Solo las activamos si nos das permiso. <a href={url('/cookies/')}>Más información</a>.
+        </p>
+        <div class="botones aviso-cookies__botones">
+          <button type="button" class="boton" data-cookies="aceptadas">Aceptar</button>
+          <button type="button" class="boton boton--secundario" data-cookies="rechazadas">Rechazar</button>
+        </div>
+      </div>
+    </section>
+
+    <script is:inline define:vars={{ id: ANALYTICS.ga4 }}>
+      (function () {
+        var CLAVE = 'culilab-cookies';
+        var aviso = document.getElementById('aviso-cookies');
+
+        function leer() {
+          try { return localStorage.getItem(CLAVE); } catch (e) { return null; }
+        }
+        function guardar(valor) {
+          try { localStorage.setItem(CLAVE, valor); } catch (e) {}
+        }
+        function cargarAnalytics() {
+          if (window.__culilabGa) return;
+          window.__culilabGa = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () { dataLayer.push(arguments); };
+          gtag('js', new Date());
+          gtag('config', id);
+        }
+        function borrarCookiesGa() {
+          document.cookie.split(';').forEach(function (c) {
+            var nombre = c.split('=')[0].trim();
+            if (nombre.indexOf('_ga') === 0) {
+              var dominio = location.hostname;
+              document.cookie = nombre + '=; Max-Age=0; path=/';
+              document.cookie = nombre + '=; Max-Age=0; path=/; domain=' + dominio;
+              document.cookie = nombre + '=; Max-Age=0; path=/; domain=.' + dominio;
+            }
+          });
+        }
+
+        var eleccion = leer();
+        if (eleccion === 'aceptadas') cargarAnalytics();
+        else if (eleccion !== 'rechazadas') aviso.hidden = false;
+
+        aviso.addEventListener('click', function (e) {
+          var valor = e.target.getAttribute && e.target.getAttribute('data-cookies');
+          if (!valor) return;
+          guardar(valor);
+          aviso.hidden = true;
+          if (valor === 'aceptadas') cargarAnalytics();
+          else borrarCookiesGa();
+        });
+
+        // Botón «Cambiar mi elección» de la política de cookies
+        document.addEventListener('click', function (e) {
+          if (e.target.closest && e.target.closest('[data-reabrir-cookies]')) {
+            try { localStorage.removeItem(CLAVE); } catch (err) {}
+            borrarCookiesGa();
+            aviso.hidden = false;
+            aviso.querySelector('button').focus();
+          }
+        });
+      })();
+    </script>
+  </>
+)}
+
+<style>
+  .aviso-cookies {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 50;
+    background: var(--blanco);
+    border-top: 4px solid var(--rojo);
+    box-shadow: 0 -6px 24px rgb(42 26 16 / 0.15);
+    padding-block: 1rem;
+  }
+  .aviso-cookies[hidden] {
+    display: none;
+  }
+  .aviso-cookies__caja {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem 1.5rem;
+  }
+  .aviso-cookies__texto {
+    margin: 0;
+    flex: 1 1 32rem;
+    font-size: 0.95rem;
+  }
+  .aviso-cookies__botones {
+    flex: 0 0 auto;
+  }
+</style>

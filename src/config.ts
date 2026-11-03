@@ -50,8 +50,8 @@ export const FORMS = {
   clasePrueba: '',  // lista «Clase de prueba» (Alejandro, Google Ads)
 };
 
-// Medición (Misión 8). Dejar vacío hasta tener el banner de cookies.
+// Medición (Misión 8). GA4 solo se carga si el visitante acepta la analítica en el aviso de cookies.
 export const ANALYTICS = {
-  ga4: '',                       // p. ej. 'G-XXXXXXXXXX'
+  ga4: 'G-CWEMV82NR6',            // propiedad «CuliLab web», flujo «Web CuliLab» (03/11/2026)
   searchConsoleVerification: '', // código de la etiqueta meta de Search Console
 };
