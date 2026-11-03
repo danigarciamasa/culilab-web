@@ -1,0 +1,36 @@
+---
+// Página a la que Brevo redirige tras enviar un formulario (Misión 7).
+// ?f=guia o ?f=clase cambia el texto. Lleva noindex y no está en el sitemap.
+import Base from '../layouts/Base.astro';
+import { url } from '../utils';
+---
+
+<Base title="¡Gracias! · CuliLab" description="Hemos recibido tu registro en CuliLab." noindex>
+  <section class="seccion texto-centro">
+    <div class="contenedor">
+      <div class="cabecera-seccion">
+        <p class="antetitulo">Registro recibido</p>
+        <h1 id="gracias-titulo">¡Gracias! Ya estás dentro</h1>
+        <p class="entradilla" id="gracias-texto">
+          Revisa tu email en los próximos minutos (mira también en «Promociones» o «Spam»). Ahí tienes lo que nos has pedido.
+        </p>
+      </div>
+      <p>Mientras tanto, empieza por el reto de 5 minutos: entender por qué se corta la mayonesa.</p>
+      <div class="botones">
+        <a class="boton" href={url('/blog/por-que-se-corta-la-mayonesa/')}>Hacer el reto de 5 minutos</a>
+        <a class="boton boton--secundario" href={url('/blog/')}>Ir al blog</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  (function () {
+    var f = new URLSearchParams(location.search).get('f');
+    if (f === 'clase') {
+      document.getElementById('gracias-titulo').textContent = '¡Gracias! Tu clase de prueba está reservada';
+      document.getElementById('gracias-texto').textContent =
+        'Te acabamos de escribir con el enlace y la fecha de la clase en directo. Si no lo ves en unos minutos, mira en «Promociones» o «Spam».';
+    }
+  })();
+</script>

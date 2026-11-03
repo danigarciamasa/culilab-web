@@ -8,7 +8,8 @@ export default defineConfig({
   site: 'https://danigarciamasa.github.io',
   base: '/culilab-web',
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  // La página de «gracias» no va al sitemap (lleva noindex).
+  integrations: [sitemap({ filter: (page) => !page.includes('/gracias/') })],
   // CSS dentro del HTML: sin petición que bloquee el renderizado (PageSpeed, Misión 3).
   build: { inlineStylesheets: 'always' },
   // Fuentes servidas desde la propia web (solo latín) con fuentes de reserva ajustadas a sus medidas:

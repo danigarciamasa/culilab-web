@@ -1,7 +1,8 @@
 ---
 // Formulario de captación conectado a Brevo (Misión 7).
 // Mientras no exista la URL del formulario en src/config.ts, se muestra
-// desactivado con el aviso «en preparación».
+// desactivado con el aviso «en preparación». Al enviarlo, si el visitante aceptó
+// la analítica, se registra el evento generate_lead en GA4 (Misión 8).
 import { url } from '../utils';
 import { CONTACT_EMAIL } from '../config';
 
@@ -24,7 +25,7 @@ const activo = Boolean(action);
 >
   <div class="campo">
     <label for={`${id}-nombre`}>Tu nombre</label>
-    <input id={`${id}-nombre`} name="FIRSTNAME" type="text" autocomplete="given-name" required />
+    <input id={`${id}-nombre`} name="NOMBRE" type="text" autocomplete="given-name" required />
   </div>
   <div class="campo">
     <label for={`${id}-email`}>Tu email</label>
@@ -44,6 +45,16 @@ const activo = Boolean(action);
   <input type="hidden" name="locale" value="es" />
 
   <button class="boton formulario__boton" type="submit" disabled={!activo}>{boton}</button>
+
+  {activo && (
+    <script is:inline define:vars={{ id, formulario: id.replace('formulario-', '') }}>
+      document.getElementById(id).addEventListener('submit', function () {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', { formulario: formulario, transport_type: 'beacon' });
+        }
+      });
+    </script>
+  )}
 
   {!activo && (
     <p class="formulario__aviso" role="status">

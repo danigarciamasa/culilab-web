@@ -42,12 +42,14 @@ export const SOCIAL = {
 // Email de contacto del equipo (una cuenta gratuita de Gmail vale).
 export const CONTACT_EMAIL = 'culilab8@gmail.com';
 
-// Formularios de Brevo (Misión 7). En Brevo: Contactos → Formularios →
-// crear formulario → «Compartir» → copiar la URL que empieza por
-// https://...sibforms.com/serve/... y pegarla aquí.
+// Formularios de Brevo (Misión 7), creados el 03/11/2026 en la cuenta culilab8@gmail.com
+// (Marketing → Formularios). Es el «action» del código HTML de cada formulario.
+// Campos de Brevo: EMAIL, NOMBRE, OPT_IN, email_address_check (trampa) y locale.
 export const FORMS = {
-  guia: '',         // lista «Guía gratuita» (Hugo y Carla)
-  clasePrueba: '',  // lista «Clase de prueba» (Alejandro, Google Ads)
+  // lista «Guía gratuita» (Hugo y Carla)
+  guia: 'https://ef07bd4d.sibforms.com/serve/MUIFAKkZzPaCZL3R44ka_HO9CjoLi18IVP1UASiFwUq5dSiWeCDX5TsGRnvvZ8PPXyltrtctngvGbs3yoqoFIHEbnrcFdLXNNI0qVDE6dNrRLKNVYu5rEGBb9-90dCc_SXaVbxdt6WVWIBVncr1hhvDlaRTmoKG8yDmOOp7qw4eCb4IU5Pvn1L-BmWU3lPr6IUzDS82ahYgydrXrrw==',
+  // lista «Clase de prueba» (Alejandro, Google Ads)
+  clasePrueba: 'https://ef07bd4d.sibforms.com/serve/MUIFAJBWDICClJkdOl6CthG4epDOlV7j8VEZgwDOGhpcbAQIjOwUhY59TNJLvB91jXd6PAeAgPlPzDMc53oO0Sdf33CrBO80lFFZFR1WFZ-z8L3M7disBucbmrl12kQeEsK0NXez3Qo2HS4KlM_JfMYyPcnactBncv8Vzomof-gRbrukqGU6CNrFaumclj61gje_aOsheb5ovugKBw==',
 };
 
 // Medición (Misión 8). GA4 solo se carga si el visitante acepta la analítica en el aviso de cookies.
